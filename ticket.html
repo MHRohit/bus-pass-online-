@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ticket Booking</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Ticket Booking</h2>
+
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="date" id="date">
+    <input type="text" id="bus" placeholder="Bus Number">
+    <input type="text" id="phone" placeholder="Phone Number">
+    <input type="number" id="age" placeholder="Age">
+
+    <select id="gender">
+        <option value="">Select Gender</option>
+        <option>Male</option>
+        <option>Female</option>
+    </select>
+
+    <button id="submitBtn">Submit</button>
+    <button onclick="window.location.href='profile.html'">Back</button>
+</div>
+
+
+<div id="paymentModal" class="modal">
+    <div class="modal-content">
+        <span style="float:right;cursor:pointer;" id="closeModal">X</span>
+        <h3>Payment</h3>
+
+        <select id="paymentMethod">
+            <option value="">Select Payment Method</option>
+            <option>UPI</option>
+            <option>Card</option>
+        </select>
+
+        <input type="text" id="paymentNumber"
+        placeholder="Enter UPI ID or Card Number">
+
+        <button id="payNowBtn">Pay Now</button>
+    </div>
+</div>
+
+<script>
+
+
+let user = localStorage.getItem("userEmail");
+if(!user){
+    alert("Please login first");
+    window.location.href="index.html";
+}
+
+
+document.getElementById("submitBtn").onclick = function(){
+
+    let age = parseInt(document.getElementById("age").value);
+    let gender = document.getElementById("gender").value;
+
+    if(!age || gender===""){
+        alert("Fill all details");
+        return;
+    }
+
+    let amount = 100;
+
+    if(age >= 75){
+        amount = 0;
+    }
+    else if(age >= 15 && age <= 50){
+        if(gender === "Female"){
+            amount = 50;
+        } else {
+            amount = 100;
+        }
+    }
+
+    document.getElementById("paymentModal").style.display = "block";
+    localStorage.setItem("ticketAmount", amount);
+};
+
+
+document.getElementById("closeModal").onclick = function(){
+    document.getElementById("paymentModal").style.display = "none";
+};
+
+
+document.getElementById("payNowBtn").onclick = function(){
+
+    let method = document.getElementById("paymentMethod").value;
+    let number = document.getElementById("paymentNumber").value;
+    let amount = localStorage.getItem("ticketAmount");
+
+    if(method==="" || number.length < 4){
+        alert("Enter valid payment details");
+        return;
+    }
+
+    alert("Payment Successful ₹" + amount);
+
+    let history = JSON.parse(localStorage.getItem("history")) || [];
+
+    history.push({
+        type: "Ticket Booking",
+        amount: amount,
+        date: new Date().toLocaleString()
+    });
+
+    localStorage.setItem("history", JSON.stringify(history));
+
+    window.location.href="profile.html";
+};
+
+</script>
+
+</body>
+</html>

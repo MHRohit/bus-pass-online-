@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Commuter Pass</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+<h2>Commuter Pass</h2>
+
+<input id="name" placeholder="Full Name">
+<input id="phone" placeholder="Phone Number">
+<input id="gmail" placeholder="Gmail">
+<input id="route" placeholder="Route Name">
+<select id="gender">
+<option>Male</option>
+<option>Female</option>
+</select>
+<input id="address" placeholder="Address">
+
+<button onclick="commuterSubmit()">Submit</button>
+</div>
+
+<div id="paymentModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closePayment()">X</span>
+        <h3>Payment</h3>
+
+        <select id="paymentMethod">
+            <option value="">Select Payment Method</option>
+            <option value="UPI">UPI</option>
+            <option value="CARD">Credit/Debit Card</option>
+        </select>
+
+        <input type="text" id="paymentNumber" placeholder="Enter UPI ID or Card Number">
+
+        <button onclick="completePayment()">Pay Now</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

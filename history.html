@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking History</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Booking History</h2>
+
+    <div id="historyList"></div>
+
+    <button onclick="window.location.href='profile.html'">
+        Back
+    </button>
+</div>
+
+<script>
+
+let user = localStorage.getItem("userEmail");
+if(!user){
+    alert("Please login first");
+    window.location.href="index.html";
+}
+
+let history = JSON.parse(localStorage.getItem("history")) || [];
+let container = document.getElementById("historyList");
+
+if(history.length === 0){
+    container.innerHTML = "No Booking Found";
+}
+else{
+    history.forEach((item,index)=>{
+
+        let div = document.createElement("div");
+        div.style.background="#f1f1f1";
+        div.style.padding="10px";
+        div.style.margin="8px 0";
+        div.style.borderRadius="5px";
+
+        div.innerHTML = `
+            <b>${item.type}</b><br>
+            Amount: ₹${item.amount}<br>
+            Date: ${item.date}<br>
+            <button onclick="cancelBooking(${index})">
+                Cancel & Refund
+            </button>
+        `;
+
+        container.appendChild(div);
+    });
+}
+
+function cancelBooking(index){
+
+    let history = JSON.parse(localStorage.getItem("history")) || [];
+
+    if(!confirm("Are you sure to cancel?")) return;
+
+    alert("Refund Successful ₹" + history[index].amount);
+
+    history.splice(index,1);
+    localStorage.setItem("history", JSON.stringify(history));
+
+    location.reload();
+}
+
+</script>
+
+</body>
+</html>
+
+
+

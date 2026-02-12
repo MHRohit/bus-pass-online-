@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>School Pass</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+<h2>School Bus Pass</h2>
+
+<input id="name" placeholder="Full Name">
+<input id="school" placeholder="School Name">
+<input id="mobile" placeholder="Mobile Number">
+<input id="route" placeholder="Route Name">
+<input id="age" type="number" placeholder="Age">
+<select id="gender">
+<option>Male</option>
+<option>Female</option>
+</select>
+<input id="address" placeholder="Address">
+
+<button onclick="schoolSubmit()">Submit</button>
+</div>
+
+<div id="paymentModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closePayment()">X</span>
+        <h3>Payment</h3>
+
+        <select id="paymentMethod">
+            <option value="">Select Payment Method</option>
+            <option value="UPI">UPI</option>
+            <option value="CARD">Credit/Debit Card</option>
+        </select>
+
+        <input type="text" id="paymentNumber" placeholder="Enter UPI ID or Card Number">
+
+        <button onclick="completePayment()">Pay Now</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

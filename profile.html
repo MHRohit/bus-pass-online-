@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Welcome</h2>
+
+    <p><b>User Email:</b> 
+        <span id="userEmail"></span>
+    </p>
+
+    <hr>
+
+    <button onclick="window.location.href='school.html'">
+        School Bus Pass
+    </button>
+
+    <button onclick="window.location.href='college.html'">
+        College Bus Pass
+    </button>
+
+    <button onclick="window.location.href='commuter.html'">
+        Commuter Pass
+    </button>
+
+    <button onclick="window.location.href='ticket.html'">
+        Ticket Booking
+    </button>
+
+    <hr>
+
+    
+    <button onclick="window.location.href='history.html'">
+        View History
+    </button>
+
+    <button onclick="window.location.href='refund.html'">
+        Refund Page
+    </button>
+
+    <hr>
+
+    <button onclick="logout()">
+        Logout
+    </button>
+
+</div>
+
+<script>
+    
+    let user = localStorage.getItem("userEmail");
+
+    if(!user){
+        alert("Please login first");
+        window.location.href = "index.html";
+    } else {
+        document.getElementById("userEmail").innerText = user;
+    }
+
+    function logout(){
+        localStorage.removeItem("userEmail");
+        window.location.href = "index.html";
+    }
+</script>
+
+</body>
+</html>
+
+
+
